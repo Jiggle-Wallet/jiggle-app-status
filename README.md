@@ -66,13 +66,21 @@ npx expo start
 ## First-time Expo setup
 
 ```bash
-npm install -g eas-cli
+npm install              # REQUIRED before eas init (needs node_modules for expo-router plugin)
+npm install -g eas-cli   # if needed
 eas login
-eas init          # links project + writes projectId into app.json
+eas init                 # link existing Expo project "jiggle-app-status" or create one
 npx expo export --platform web
-eas deploy        # first deploy; note the production URL
-# or: eas deploy --prod
+eas deploy --prod        # note the production URL
 ```
+
+**Common failures**
+
+| Error | Fix |
+|-------|-----|
+| `Failed to resolve plugin "expo-router"` | Run `npm install` in this directory |
+| `"deploy" is not allowed` in eas.json | Don't put a `deploy` key in eas.json — use `eas deploy` CLI |
+| `npx expo config` non-zero | Same as missing `node_modules` |
 
 `eas.json` only needs a valid `cli` block for this hosting-only project.
 There is **no** `deploy` key in `eas.json` — hosting is configured by the

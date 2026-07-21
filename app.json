@@ -11,12 +11,19 @@
       "bundler": "metro"
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      "expo-font",
+      "expo-asset"
     ],
     "experiments": {
       "typedRoutes": true
     },
-    "owner": "jiggle-wallet"
+    "owner": "jiggle-wallet",
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "47e6a242-931b-4267-99c1-3e4a152735b6"
+      }
+    }
   }
 }
-

@@ -16,11 +16,7 @@
     "experiments": {
       "typedRoutes": true
     },
-    "extra": {
-      "eas": {
-        "projectId": "REPLACE_AFTER_EAS_INIT"
-      }
-    },
     "owner": "jiggle-wallet"
   }
 }
+

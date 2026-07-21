@@ -68,9 +68,15 @@ npx expo start
 ```bash
 npm install -g eas-cli
 eas login
-eas init          # writes projectId into app.json
+eas init          # links project + writes projectId into app.json
+npx expo export --platform web
 eas deploy        # first deploy; note the production URL
+# or: eas deploy --prod
 ```
+
+`eas.json` only needs a valid `cli` block for this hosting-only project.
+There is **no** `deploy` key in `eas.json` — hosting is configured by the
+CLI command (`eas deploy`), not by a schema profile.
 
 Wire the production URL into Jiggle-V3 as:
 

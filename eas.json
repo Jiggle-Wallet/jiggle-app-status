@@ -1,16 +1,5 @@
 {
   "cli": {
-    "version": ">= 14.2.0",
-    "appVersionSource": "remote"
-  },
-  "build": {
-    "production": {
-      "channel": "production"
-    }
-  },
-  "deploy": {
-    "production": {
-      "channel": "production"
-    }
+    "version": ">= 14.2.0"
   }
 }

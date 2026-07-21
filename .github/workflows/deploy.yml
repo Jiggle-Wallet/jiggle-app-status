@@ -39,5 +39,8 @@ jobs:
           eas-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
 
+      - name: Export web
+        run: npx expo export --platform web
+
       - name: Deploy to EAS Hosting (production)
         run: eas deploy --prod --non-interactive

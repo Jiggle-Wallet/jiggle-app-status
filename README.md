@@ -66,13 +66,18 @@ npx expo start
 ## First-time Expo setup
 
 ```bash
-npm install              # REQUIRED before eas init (needs node_modules for expo-router plugin)
-npm install -g eas-cli   # if needed
+npm install              # REQUIRED before eas init / export / deploy
 eas login
 eas init                 # link existing Expo project "jiggle-app-status" or create one
-npx expo export --platform web
-eas deploy --prod        # note the production URL
+
+# Prefer project-local eas-cli (pinned) — global eas-cli@16 fails hosting with
+# "The specified bucket does not exist"
+npm run deploy:prod      # export + npx eas-cli deploy --prod
 ```
+
+**Production URL (current):** `https://jiggle-status.expo.app`  
+**Status API:** `https://jiggle-status.expo.app/status`  
+**Static mirror:** `https://jiggle-status.expo.app/status.json`
 
 **Common failures**
 

@@ -7,8 +7,8 @@
   "scripts": {
     "start": "expo start",
     "export": "expo export --platform web",
-    "deploy": "eas deploy",
-    "deploy:prod": "eas deploy --prod"
+    "deploy": "npx eas-cli deploy",
+    "deploy:prod": "npx expo export --platform web && npx eas-cli deploy --prod"
   },
   "dependencies": {
     "@expo/metro-runtime": "~5.0.5",
@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "@types/react": "~19.0.10",
+    "eas-cli": "^21.0.2",
     "typescript": "~5.8.3"
   }
 }

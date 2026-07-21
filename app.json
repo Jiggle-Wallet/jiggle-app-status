@@ -1,0 +1,26 @@
+{
+  "expo": {
+    "name": "Jiggle App Status",
+    "slug": "jiggle-app-status",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "jiggle-app-status",
+    "userInterfaceStyle": "automatic",
+    "web": {
+      "output": "server",
+      "bundler": "metro"
+    },
+    "plugins": [
+      "expo-router"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "REPLACE_AFTER_EAS_INIT"
+      }
+    },
+    "owner": "jiggle-wallet"
+  }
+}

@@ -70,14 +70,40 @@ npm install              # REQUIRED before eas init / export / deploy
 eas login
 eas init                 # link existing Expo project "jiggle-app-status" or create one
 
-# Prefer project-local eas-cli (pinned) — global eas-cli@16 fails hosting with
-# "The specified bucket does not exist"
-npm run deploy:prod      # export + npx eas-cli deploy --prod
+# Prefer project-local eas-cli (pinned) — NEVER bare `eas deploy` if PATH has an old CLI
+npm run deploy:prod      # export + npx eas-cli@>=21 deploy --prod
 ```
 
 **Production URL (current):** `https://jiggle-status.expo.app`  
 **Status API:** `https://jiggle-status.expo.app/status`  
 **Static mirror:** `https://jiggle-status.expo.app/status.json`
+
+### `eas deploy` still says you're on 16.x after upgrading
+
+You almost certainly have **two** `eas` binaries; the old one wins on `PATH`:
+
+| Binary | Typical version |
+|--------|-----------------|
+| `/usr/local/bin/eas` | stale **16.x** (Intel/old npm global) |
+| `/opt/homebrew/bin/eas` | **21.x** (Homebrew / new npm) |
+
+```bash
+which -a eas
+/usr/local/bin/eas --version    # often 16.x
+/opt/homebrew/bin/eas --version # 21.x
+
+# Fix: remove the stale one, or always use the project script
+rm /usr/local/bin/eas
+# or: /usr/local/bin/npm uninstall -g eas-cli
+
+# Safest — ignores PATH entirely:
+cd /Volumes/MyTera/dev/jiggle/infrav3/jiggle-app-status
+npm run deploy:prod
+```
+
+This hosting endpoint is **only** min-versions / maintenance JSON.  
+Server softStatus (`green|amber|red`) lives on **Jiggle-Server-Web**  
+`GET https://my.jigglewallet.com/main/status` — not on `jiggle-status.expo.app`.
 
 **Common failures**
 

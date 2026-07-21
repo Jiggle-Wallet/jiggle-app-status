@@ -1,12 +1,12 @@
 {
   "minimumVersions": {
-    "ios": "3.0.0",
-    "android": "3.0.0",
+    "ios": "3.1.1",
+    "android": "3.2.2",
     "web": "1.0.0"
   },
   "recommendedVersions": {
     "ios": "3.1.1",
-    "android": "3.1.1",
+    "android": "3.2.2",
     "web": "1.0.0"
   },
   "storeUrls": {
@@ -19,5 +19,5 @@
     "allowRead": true,
     "learnMoreUrl": null
   },
-  "updatedAt": "2026-07-21T00:00:00.000Z"
+  "updatedAt": "2026-07-21T08:45:55.000Z"
 }

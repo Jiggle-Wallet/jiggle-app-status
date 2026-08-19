@@ -35,14 +35,26 @@ jobs:
           cp status.json public/status.json
           cp status.preview.json public/status.preview.json
 
+      - name: Check EXPO_TOKEN
+        run: |
+          if [ -z "${{ secrets.EXPO_TOKEN }}" ]; then
+            echo "Missing GitHub Actions secret EXPO_TOKEN."
+            echo "Create an Expo access token: https://expo.dev/settings/access-tokens"
+            echo "Then add it as a repository secret named EXPO_TOKEN on Jiggle-Wallet/jiggle-app-status."
+            exit 1
+          fi
+
       - name: Setup Expo
         uses: expo/expo-github-action@v8
         with:
           eas-version: latest
+          packager: npm
           token: ${{ secrets.EXPO_TOKEN }}
 
       - name: Export web
         run: npx expo export --platform web
 
       - name: Deploy to EAS Hosting (production)
-        run: eas deploy --prod --non-interactive
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+        run: npx eas-cli deploy --prod --non-interactive

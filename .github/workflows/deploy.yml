@@ -28,13 +28,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # Keep public mirrors in lockstep with the root sources of truth so
-      # static fallbacks and the API routes always agree.
-      - name: Sync public mirrors
-        run: |
-          cp status.json public/status.json
-          cp status.preview.json public/status.preview.json
-
       - name: Check EXPO_TOKEN
         run: |
           if [ -z "${{ secrets.EXPO_TOKEN }}" ]; then
@@ -52,7 +45,7 @@ jobs:
           token: ${{ secrets.EXPO_TOKEN }}
 
       - name: Export web
-        run: npx expo export --platform web
+        run: npm run export
 
       - name: Deploy to EAS Hosting (production)
         env:

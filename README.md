@@ -8,9 +8,11 @@ work when our servers are down or being upgraded.
 
 ## Source of truth
 
-Edit **`status.json`** (production) or **`status.preview.json`** (preview / sandbox).
-CI copies them to `public/` on deploy. Never raise mins in `status.json` just to test
-— that blocks production clients. Use `status.preview.json` instead.
+Edit **`status.json`** (production) or **`status.preview.json`** (preview / sandbox)
+at the repo root. Do not edit `public/` — `npm run sync-public` (and CI) copies
+those files there for the static hosting mirrors. Never raise mins in
+`status.json` just to test — that blocks production clients. Use
+`status.preview.json` instead.
 
 ```json
 {
@@ -138,9 +140,7 @@ Push to `main` → GitHub Actions runs `eas deploy --prod` (needs `EXPO_TOKEN` s
 Manual:
 
 ```bash
-cp status.json public/status.json
-cp status.preview.json public/status.preview.json
-eas deploy --prod
+npm run deploy:prod
 ```
 
 ## Client behaviour (Jiggle-V3)

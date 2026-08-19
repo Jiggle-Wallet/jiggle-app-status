@@ -1,6 +1,6 @@
 {
   "minimumVersions": {
-    "ios": "3.1.4",
+    "ios": "3.1.1",
     "android": "3.2.2",
     "web": "1.0.0"
   },
@@ -14,7 +14,7 @@
     "android": "https://play.google.com/store/apps/details?id=com.jiggle.wallet"
   },
   "maintenance": {
-    "active": false,
+    "active": true,
     "message": "",
     "allowRead": true,
     "learnMoreUrl": null

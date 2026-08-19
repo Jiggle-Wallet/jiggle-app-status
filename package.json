@@ -5,10 +5,13 @@
   "description": "Out-of-band app status (force-upgrade + maintenance) served via EAS Hosting",
   "main": "expo-router/entry",
   "scripts": {
+    "sync-public": "mkdir -p public && cp status.json public/status.json && cp status.preview.json public/status.preview.json",
+    "prestart": "npm run sync-public",
     "start": "expo start",
+    "preexport": "npm run sync-public",
     "export": "expo export --platform web",
     "deploy": "npx eas-cli deploy",
-    "deploy:prod": "npx expo export --platform web && npx eas-cli deploy --prod"
+    "deploy:prod": "npm run export && npx eas-cli deploy --prod"
   },
   "dependencies": {
     "@expo/metro-runtime": "~5.0.5",

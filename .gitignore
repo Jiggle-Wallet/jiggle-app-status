@@ -7,3 +7,7 @@ web-build/
 .env
 .env.*
 !.env.example
+
+# Generated from root status.json / status.preview.json (see npm run sync-public)
+public/status.json
+public/status.preview.json

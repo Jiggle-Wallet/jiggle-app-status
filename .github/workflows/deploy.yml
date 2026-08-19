@@ -28,10 +28,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # Keep public/status.json in lockstep with the root source of truth so
-      # static fallbacks (/status.json) and the API route always agree.
-      - name: Sync public mirror
-        run: cp status.json public/status.json
+      # Keep public mirrors in lockstep with the root sources of truth so
+      # static fallbacks and the API routes always agree.
+      - name: Sync public mirrors
+        run: |
+          cp status.json public/status.json
+          cp status.preview.json public/status.preview.json
 
       - name: Setup Expo
         uses: expo/expo-github-action@v8

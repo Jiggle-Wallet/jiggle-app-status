@@ -8,7 +8,9 @@ work when our servers are down or being upgraded.
 
 ## Source of truth
 
-Edit **`status.json`** (root). CI copies it to `public/status.json` on deploy.
+Edit **`status.json`** (production) or **`status.preview.json`** (preview / sandbox).
+CI copies them to `public/` on deploy. Never raise mins in `status.json` just to test
+— that blocks production clients. Use `status.preview.json` instead.
 
 ```json
 {
@@ -49,9 +51,12 @@ Edit **`status.json`** (root). CI copies it to `public/status.json` on deploy.
 
 | URL | Use |
 |-----|-----|
-| `https://<alias>.expo.app/status` | Primary — JSON with short `Cache-Control` |
-| `https://<alias>.expo.app/status.json` | Static public mirror |
-| `https://raw.githubusercontent.com/Jiggle-Wallet/jiggle-app-status/main/status.json` | Hardcoded client fallback |
+| `https://jiggle-status.expo.app/status` | Production — JSON with short `Cache-Control` |
+| `https://jiggle-status.expo.app/status.json` | Production static mirror |
+| `https://jiggle-status.expo.app/status-preview` | Preview / sandbox (EAS profile `preview`) |
+| `https://jiggle-status.expo.app/status.preview.json` | Preview static mirror |
+| `https://raw.githubusercontent.com/Jiggle-Wallet/jiggle-app-status/main/status.json` | Production GitHub fallback |
+| `https://raw.githubusercontent.com/Jiggle-Wallet/jiggle-app-status/main/status.preview.json` | Preview GitHub fallback |
 
 Primary has ~60s freshness (see `app/status+api.ts`). raw.githubusercontent is ~5 min cached and is only a backup network path.
 
@@ -76,7 +81,9 @@ npm run deploy:prod      # export + npx eas-cli@>=21 deploy --prod
 
 **Production URL (current):** `https://jiggle-status.expo.app`  
 **Status API:** `https://jiggle-status.expo.app/status`  
-**Static mirror:** `https://jiggle-status.expo.app/status.json`
+**Static mirror:** `https://jiggle-status.expo.app/status.json`  
+**Preview API:** `https://jiggle-status.expo.app/status-preview`  
+**Preview static:** `https://jiggle-status.expo.app/status.preview.json`
 
 ### `eas deploy` still says you're on 16.x after upgrading
 
@@ -117,10 +124,12 @@ Server softStatus (`green|amber|red`) lives on **Jiggle-Server-Web**
 There is **no** `deploy` key in `eas.json` — hosting is configured by the
 CLI command (`eas deploy`), not by a schema profile.
 
-Wire the production URL into Jiggle-V3 as:
+Wire URLs into Jiggle-V3:
 
-- `EXPO_PUBLIC_APP_STATUS_URL` (primary, e.g. `https://jiggle-app-status.expo.app/status`)
-- `EXPO_PUBLIC_APP_STATUS_FALLBACK_URL` (optional raw GitHub URL)
+- Production (defaults in `app.config.js`): `/status` + GitHub `status.json`
+- Preview (EAS profile `preview` in `eas.json`): `/status-preview` + GitHub `status.preview.json`
+
+Override locally with `EXPO_PUBLIC_APP_STATUS_URL` / `EXPO_PUBLIC_APP_STATUS_FALLBACK_URL`.
 
 ## Deploy
 
@@ -130,6 +139,7 @@ Manual:
 
 ```bash
 cp status.json public/status.json
+cp status.preview.json public/status.preview.json
 eas deploy --prod
 ```
 

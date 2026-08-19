@@ -15,6 +15,8 @@ export default function Index() {
       </Text>
       <Text style={styles.mono}>GET /status</Text>
       <Text style={styles.mono}>GET /status.json</Text>
+      <Text style={styles.mono}>GET /status-preview</Text>
+      <Text style={styles.mono}>GET /status.preview.json</Text>
       <Text style={styles.meta}>
         maintenance: {maintenance} · updatedAt: {status.updatedAt}
       </Text>

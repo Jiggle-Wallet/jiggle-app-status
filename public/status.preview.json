@@ -1,6 +1,6 @@
 {
   "minimumVersions": {
-    "ios": "3.1.2",
+    "ios": "3.1.4",
     "android": "3.2.2",
     "web": "1.0.0"
   },
